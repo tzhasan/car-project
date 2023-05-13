@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
 const port = process.env.PORT || 5000;
 require("dotenv").config();
@@ -10,7 +11,6 @@ const jwt = require("jsonwebtoken");
 app.use(cors());
 app.use(express.json());
 
-const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
 const uri = `mongodb+srv://${process.env.S3_BUCKET}:${process.env.SECRET_KEY}@cluster0.ex2dsg0.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -43,7 +43,7 @@ const vrifyJWT = (req, res, next) => {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
 
     const serviceCollection = client.db("carDoctor").collection("services");
     const CheckOutCollection = client.db("carDoctor").collection("CheckOut");
